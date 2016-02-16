@@ -1,0 +1,34 @@
+
+
+
+
+import os 
+import shutil
+file_list = [ os.path.join('mock_data', x) for x in os.listdir('mock_data')]
+
+
+file_map = {
+'mock_data/test_a.txt' : 'mock_data/test_a.csv',
+'mock_data/test_b.txt' : 'mock_data/test_b.csv',
+'mock_data/test_c.txt' : 'mock_data/test_c.csv'
+}
+
+
+output_files = [v for k, v in file_map.items()]
+
+rule all : 
+    input : output_files
+
+rule change_name:
+    input: file_list 
+    output : output_files
+    run : 
+        for x in input:
+             name_file_name = file_map[x]     
+             shutil.copyfile(x, name_file_name)
+
+
+
+
+
+

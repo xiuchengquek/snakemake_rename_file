@@ -1,0 +1,43 @@
+
+
+
+
+import os 
+import shutil
+file_list = [ os.path.join('mock_data', x) for x in os.listdir('mock_data')]
+
+
+file_map = {
+'mock_data/test_a.txt' : 'mock_data/test_a.csv',
+'mock_data/test_b.txt' : 'mock_data/test_b.csv',
+'mock_data/test_c.txt' : 'mock_data/test_c.csv'
+}
+
+
+file_map_2 = {
+'test_a' : 'icanchangetheworld',
+'test_b' : 'morethananythingelse',
+'test_c' : 'theworldisarandomcarnage'
+}
+
+
+file_map_3 = { v : k for k,v in file_map_2.items() }
+
+
+
+output_files = [v.replace('csv', 'done') for k, v in file_map.items()]
+test = [os.path.join('mock_data', "%s.csv" % v) for k,v in file_map_2.items()]
+
+rule all : 
+    input : test
+
+rule change_name:
+    input: lambda x : "mock_data/%s" % file_map_3[x.samples] 
+    output : 'mock_data/{samples}.csv'
+    shell : "cp {input} {output}"
+        
+
+
+
+
+

@@ -1,0 +1,57 @@
+
+
+
+
+import os 
+import shutil
+file_list = [ os.path.join('mock_data', x) for x in os.listdir('mock_data')]
+
+
+file_map = {
+'mock_data/test_a.txt' : 'mock_data/test_a.csv',
+'mock_data/test_b.txt' : 'mock_data/test_b.csv',
+'mock_data/test_c.txt' : 'mock_data/test_c.csv'
+}
+
+
+file_map_2 = {
+'test_a.txt' : 'icanchangetheworld',
+'test_b.txt' : 'morethananythingelse',
+'test_c.txt' : 'theworldisarandomcarnage'
+}
+
+
+file_map_3 = { v : k for k,v in file_map_2.items() }
+
+athefuck = [os.path.join("thefuck", "%s" %k) for k,v in file_map_2.items()]
+
+
+test = [os.path.join('mock_data_new', "%s.csv" % v) for k,v in file_map_2.items()]
+test = ['mock_data_new/theworldisarandomcarnage.csv', 'mock_data_new/icanchangetheworld.csv', 'mock_data_new/morethananythingelse.csv']
+print(test)
+
+
+def printWildCard(x):
+    print(dir(x))
+
+    return "mock_data/{samplehahaha}".format( samplehahaha = file_map_3[x.zerglord])
+
+
+def movethefukc(x):
+    return "mock_data_new/{lolol}.csv".format(lolol = file_map_2[x.thefuck])
+
+
+rule all : 
+    input : test,  athefuck
+
+rule change_name:
+    input: printWildCard 
+    output : 'mock_data_new/{zerglord}.csv'
+    shell : "cp {input} {output}"
+
+
+rule move_again:
+    input : movethefukc 
+    output: 'thefuck/{thefuck}'
+    shell : "cp {input} {output}"
+
